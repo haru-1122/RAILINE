@@ -1,0 +1,66 @@
+.container {
+    padding: 20px;
+}
+
+.line-section {
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.line-name {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    border-left: 5px solid #007bff;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.station-list {
+    list-style: none;
+    padding-left: 20px;
+    position: relative;
+}
+
+.station-list::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ccc;
+}
+
+.station-list li {
+    position: relative;
+    padding: 8px 0;
+    line-height: 1;
+}
+
+.station-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.station-check {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-left: -20px; 
+    background: white;
+}
+
+.station-check:checked + .station-name {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: line-through;
+}
+
+.station-list li:last-child {
+    font-weight: bold;
+}

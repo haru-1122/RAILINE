@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/timeline.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/stations.css') }}">
+    <title>到達駅</title>
+</head>
+<body>
+    <header><h1> {{ username }} さんの到達駅</h1></header>
+    <main class="container">
+        {% for train in trains %}
+        <section class="line-section">
+            <h2 class="line-name">{{ train.line_name }}</h2>
+            <ul class="station-list">
+                {% for s in train.stations_list %}
+                {% if s.checked == 0 %}
+                    <li>
+                        <label class="station-label">
+                            <input type="checkbox" class="station-check">
+                            <span class="station-name">{{ s.station_name }}</span>
+                        </label>
+                    </li>
+                {% else %}
+                    <li>
+                        <label class="station-label">
+                            <input type="checkbox" class="station-check" checked>
+                            <span class="station-name">{{ s.station_name }}</span>
+                        </label>
+                    </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </section>
+        {% endfor %}
+    </main>
+    <nav>
+        <a href="{{url_for('timeline')}}" class="button">タイムライン</a>
+        <a href="{{url_for('newpost')}}" class="button">新規投稿</a>
+        <a href="{{ url_for('logout') }}" class="button">ログアウト</a>
+        <a href="{{ url_for('mypage') }}" class="button">マイページ</a>
+        <a href="{{ url_for('stations') }}" class="button">到達駅</a>
+    </nav>
+</body>
+</html>

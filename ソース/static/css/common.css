@@ -1,0 +1,91 @@
+@charset "utf-8";
+
+body{
+  font-family: 'メイリオ','Meiryo';
+  color: #000;
+  background-color: #fff;
+}
+
+header{
+  padding: 30px 0 30px 0;
+  border-bottom: 1px solid #999;
+}
+header h1{
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+div#user {
+    padding: 10px;
+    font-size: 1.5rem;
+}
+
+input{
+  width: 20vw;
+  height:10vh;
+}
+input.button{
+  width: 10em;
+  height:3em;
+}
+
+input.treply{
+  width: 10vw;
+  height: 3vh;
+}
+
+input.reply{
+  width: 3em;
+  height: 2em;
+}
+
+table#timeline {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+table#timeline th {
+    border-bottom: 2px solid #333;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+table#timeline th:nth-child(3) {
+    text-align: right;
+}
+
+table#timeline td {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    vertical-align: top; 
+}
+
+table#timeline td:nth-child(3) {
+    text-align: right;
+}
+
+nav{
+  padding: 30px 0 30px 0;
+  border-top: 2px solid #333;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

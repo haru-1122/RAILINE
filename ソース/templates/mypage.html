@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/timeline.css') }}">
+    <title>マイページ</title>
+</head>
+<body>
+    <header><h1> {{ username }} さんのマイページ</h1></header>
+    <table id="timeline">
+        <tr>
+            <th>番号</th>
+            <th>ユーザー</th>
+            <th>投稿内容</th>
+            <th>投稿時間</th>
+        </tr>
+        {% for text in texts %}
+        <tr>
+            <td>{{text.username}}</td>
+            <td>{{text.text}}
+                {% if text.photo_b64 %}
+                    <div style="margin-top: 10px;">
+                        <img src="data:image/jpeg;base64,{{ text.photo_b64 }}" alt="投稿写真" style="max-width: 300px; height: auto;">
+                    </div>
+                {% endif %}
+            </td>
+            <td>{{text.timenow}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <nav>
+        <a href="{{url_for('timeline')}}" class="button">タイムライン</a>
+        <a href="{{url_for('newpost')}}" class="button">新規投稿</a>
+        <a href="{{ url_for('logout') }}" class="button">ログアウト</a>
+        <a href="{{ url_for('mypage') }}" class="button">マイページ</a>
+        <a href="{{ url_for('stations') }}" class="button">到達駅</a>
+    </nav>
+</body>
+</html>

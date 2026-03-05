@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/common.css') }}"> -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/timeline.css') }}">
+    <title>タイムライン</title>
+</head>
+<body>
+    <header><h1>タイムライン</h1></header>
+    <div id="user">おかえりなさい {{ username }} さん</div>
+    <form action="{{ url_for('search') }}" method="post">
+        <div id="search">検索</div>
+        <input type="text" name="search" required>
+        <input type="submit" value="検索" class="button">
+    </form>
+    {% if mode == "search" %}
+    <a href="{{url_for('timeline')}}" class="button">全投稿表示</a>
+    {% endif %}
+    <table id="timeline">
+        <tr>
+            <th>ユーザー</th>
+            <th>投稿内容</th>
+            <th>投稿時間</th>
+        </tr>
+        {% for text in texts %}
+        <tr>
+            <td style="display: none;">{{text.id}}</td>
+            <td>{{text.username}}</td>
+            <td>{{text.text}}
+                {% if text.photo_b64 %}
+                    <div style="margin-top: 10px;">
+                        <img src="data:image/jpeg;base64,{{ text.photo_b64 }}" alt="投稿写真" style="max-width: 300px; height: auto;">
+                    </div>
+                {% endif %}
+            </td>
+            <td>{{text.timenow}}</td>
+            <form method="post" action="{{ url_for('reply') }}">
+                <td>返信
+                <input type="hidden" name="id" value="{{ text.id }}">
+                <input type="text" name="reply" class="treply" required>
+                <input type="submit" value="返信" class="reply">
+                </td>
+            </form>
+        </tr>{% if text.replies_list %}
+        <tr>
+            <td style="display: none;"></td> <td></td> <td colspan="3"> <ul>
+                    {% for r in text.replies_list %}
+                        <li>{{ r.reply }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endif %}
+
+        {% endfor %}
+    </table>
+    <nav>
+        <a href="{{url_for('timeline')}}" class="button">タイムライン</a>
+        <a href="{{url_for('newpost')}}" class="button">新規投稿</a>
+        <a href="{{ url_for('logout') }}" class="button">ログアウト</a>
+        <a href="{{ url_for('mypage') }}" class="button">マイページ</a>
+        <a href="{{ url_for('stations') }}" class="button">到達駅</a>
+    </nav>
+    
+</body>
+</html>
