@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-import mysql.connector, base64
+import mysql.connector, base64, os
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -8,11 +8,13 @@ app.secret_key = 'local_secret_key'
 
 
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "hew",
-    "charset": "utf8mb4"
+    "host": os.environ.get("DB_HOST", "railinedb-haru-270f.k.aivencloud.com"),
+    "user": os.environ.get("DB_USER", "avnadmin"),
+    "password": os.environ.get("DB_PASSWORD", "AVNS_MuzXZBW8I2iVk46Xknn"),
+    "database": os.environ.get("DB_NAME", "defaultdb"),
+    "port": int(os.environ.get("DB_PORT", 22306)),
+    "charset": "utf8mb4",
+    "ssl_disabled": False  # AivenはSSL接続が必須のため False に設定
 }
 
 def get_db_connection():
